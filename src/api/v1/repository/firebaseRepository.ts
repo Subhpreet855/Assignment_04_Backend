@@ -1,17 +1,14 @@
-import { db } from "../../../../config/firebaseConfig";
+import  { db }  from "../../../../config/firebaseConfig";
 import { FieldValue, Timestamp } from "firebase-admin/firestore";
-import { Loan } from "../interface/loanInterface";
 
 
-
-// Custom error class for repository errors
-export class RepositoryError extends Error {
-    constructor(message: string) {
-        super(message);
-        this.name = "RepositoryError";
-    }
-}
-type FirestoreDataTypes = string | number | boolean | null | Timestamp | FieldValue;
+type FirestoreDataTypes =
+  | string
+  | number
+  | boolean
+  | null
+  | Timestamp
+  | FieldValue;
 
 interface FieldValuePair {
   fieldName: string;
@@ -26,11 +23,11 @@ export const runTransaction = async <T>(
     return await db.runTransaction(operations);
   } catch (error) {
     console.error(`Transaction failed: ${error}`);
-    throw new RepositoryError("Transaction failed");
+    throw new Error("Transaction failed");
   }
 };
 
-// Create a document in Firestore 
+// Create a document in Firestore (employee or any collection)
 export const createDocument = async <T>(
   collectionName: string,
   data: Partial<T>,
@@ -49,7 +46,7 @@ export const createDocument = async <T>(
     return docRef.id;
   } catch (error) {
     console.error(`Failed to create document: ${error}`);
-    throw new RepositoryError("Failed to create document");
+    throw new Error("Failed to create document");
   }
 };
 
@@ -61,7 +58,7 @@ export const getDocuments = async (
     return await db.collection(collectionName).get();
   } catch (error) {
     console.error(`Failed to fetch documents: ${error}`);
-    throw new RepositoryError("Failed to fetch documents");
+    throw new Error("Failed to fetch documents");
   }
 };
 
@@ -78,7 +75,7 @@ export const getDocumentById = async <T>(
     return doc.exists ? doc : null;
   } catch (error) {
     console.error(`Failed to fetch document: ${error}`);
-    throw new RepositoryError("Failed to fetch document");
+    throw new Error("Failed to fetch document");
   }
 };
 
@@ -92,15 +89,15 @@ export const updateDocument = async <T>(
     const docRef = db.collection(collectionName).doc(id);
     const docSnap = await docRef.get();
     if (!docSnap.exists) {
-      throw new RepositoryError(`Document with ID ${id} not found in ${collectionName}`);
+      throw new Error(`Document with ID ${id} not found in ${collectionName}`);
     }
     console.log(`Updating document with ID ${id} in collection ${collectionName}`);
     await docRef.update(data);
   } catch (error) {
     console.error(`Error updating document in ${collectionName} with ID ${id}: ${error}`);
-    throw new RepositoryError(`Failed to update document: ${error}`);
+    throw new Error(`Failed to update document: ${error}`);
   }
-};
+};  
 
 // Delete a document from Firestore
 export const deleteDocument = async (
@@ -119,7 +116,7 @@ export const deleteDocument = async (
     }
   } catch (error) {
     console.error(`Failed to delete document: ${error}`);
-    throw new RepositoryError("Failed to delete document");
+    throw new Error("Failed to delete document");
   }
 };
 
@@ -153,6 +150,7 @@ export const deleteDocumentsByFieldValues = async (
     }
   } catch (error) {
     console.error(`Failed to delete documents: ${error}`);
-    throw new RepositoryError("Failed to delete documents");
+    throw new Error("Failed to delete documents");
   }
 };
+
