@@ -1,5 +1,6 @@
 import { HTTP_STATUS  } from "../constants/httpConstants";
 
+
 /**
  * Base error class for application errors.
  * Extends the built-in Error class to include an error code and status code.
@@ -63,16 +64,11 @@ export class ServiceError extends AppError {
     }
 }
 
-const UNAUTHORIZED: number = 401;
-
 /**
  * Class representing an authentication error.
- * Extends the built-in Error class to include an error code.
+ * Extends the AppError class for authentication related errors.
  */
-class AuthenticationError extends Error {
-    code: string;
-    statusCode: number;
-
+export class AuthenticationError extends AppError {
     /**
      * Creates a new AuthenticationError instance.
      * @param {string} message - The error message.
@@ -81,43 +77,29 @@ class AuthenticationError extends Error {
      */
     constructor(
         message: string,
-        code: string,
-        statusCode: number = UNAUTHORIZED
+        code: string = "AUTHENTICATION_ERROR",
+        statusCode: number = HTTP_STATUS.UNAUTHORIZED
     ) {
-        super(message);
-        this.name = "AuthenticationError";
-        this.code = code;
-        this.statusCode = statusCode;
-        Object.setPrototypeOf(this, AuthenticationError.prototype);
+        super(message, code, statusCode);
     }
 }
 
-
-const FORBIDDEN: number = 403;
-
 /**
  * Class representing an authorization error.
- * Extends the built-in Error class to include an error code.
+ * Extends the AppError class for authorization related errors.
  */
-class AuthorizationError extends Error {
-    code: string;
-    statusCode: number;
-
+export class AuthorizationError extends AppError {
     /**
      * Creates a new AuthorizationError instance.
      * @param {string} message - The error message.
      * @param {string} code - The error code.
      * @param {number} statusCode - The http response code.
      */
-    constructor(message: string, code: string, statusCode: number = FORBIDDEN) {
-        super(message);
-        this.name = "AuthorizationError";
-        this.code = code;
-        this.statusCode = statusCode;
-        Object.setPrototypeOf(this, AuthorizationError.prototype);
+    constructor(
+        message: string,
+        code: string = "AUTHORIZATION_ERROR",
+        statusCode: number = HTTP_STATUS.FORBIDDEN
+    ) {
+        super(message, code, statusCode);
     }
 }
-
-export { AuthenticationError , AuthorizationError };
-
- 

@@ -1,11 +1,11 @@
 // import swagger ui middles, jsdoc-library
 import swaggerUi from "swagger-ui-express";
 import swaggerJsDoc from "swagger-jsdoc";
- 
+
 import {Express} from "express"
- 
- 
-// define swagger options
+
+
+// define swagger options 
 const swaggerOptions: swaggerJsDoc.Options = {
     definition: {
         openapi: "3.0.0",
@@ -14,7 +14,7 @@ const swaggerOptions: swaggerJsDoc.Options = {
             version: "1.0.0",
             description: "This is the API documentation for the server"
         },
- 
+
     },
     // path to annotated files
     apis: ["./src/api/v1/routes/loanRoutes.ts",
@@ -23,11 +23,11 @@ const swaggerOptions: swaggerJsDoc.Options = {
 };
 // Intialize Swagger JSDoc object
 const swaggerDocs: any = swaggerJsDoc(swaggerOptions);
- 
-// serve swagger
+
+// serve swagger 
 const setSwagger = (app: Express): void => {
     app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 }
- 
+
 // export swagger endpoint for Express app
 export default setSwagger;
