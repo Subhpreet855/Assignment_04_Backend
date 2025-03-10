@@ -5,14 +5,11 @@ import {
   reviewLoan,
   approveLoan,
 } from "../controllers/loanController";
+import { loanSchema } from "../schemas/loanSchema";
 import { validateRequest } from "../middleware/validate";
-import authenticate from "../middleware/authenticate";
-import authorize from "../middleware/authorize";
-import {
-  createLoanSchema,
-  reviewLoanSchema,
-  approveLoanSchema,
-} from "../schemas/loanSchema";
+import   authenticate  from "../middleware/authenticate";
+import  isAuthorized  from "../middleware/authorize";
+
 
 const router = express.Router();
 
@@ -22,8 +19,6 @@ const router = express.Router();
  *   post:
  *     summary: Create a new loan application
  *     tags: [Loans]
- *     security:
- *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -31,23 +26,39 @@ const router = express.Router();
  *           schema:
  *             type: object
  *             properties:
+ *               borrowerId:
+ *                 type: string
  *               amount:
  *                 type: number
- *               term:
+ *               termMonths:
+ *                 type: number
+ *               interestRate:
  *                 type: number
  *               purpose:
  *                 type: string
+ *             required:
+ *               - borrowerId
+ *               - amount
+ *               - termMonths
+ *               - interestRate
  *     responses:
  *       201:
  *         description: Loan application created successfully
  *       400:
  *         description: Validation error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Validation error: Borrower ID is required, Loan amount must be greater than zero, Interest rate is required, Loan term (in months) is required"
  */
 router.post(
   "/",
   authenticate,
-  authorize({ hasRole: ["user"] }),
-  validateRequest(createLoanSchema),
+  isAuthorized({hasRole: ["user"]}),// validateRequest(loanSchema)
   async (req: Request, res: Response, next: NextFunction) => {
     await createLoan(req, res, next);
   }
@@ -59,16 +70,14 @@ router.post(
  *   get:
  *     summary: Get all loan applications
  *     tags: [Loans]
- *     security:
- *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: List of loan applications
  */
 router.get(
   "/",
-  authenticate,
-  authorize({ hasRole: ["officer", "Manager"] }),
+   authenticate, 
+   isAuthorized({ hasRole: ["officer", "Manager"] }), 
   async (req: Request, res: Response, next: NextFunction) => {
     await getLoans(req, res, next);
   }
@@ -80,8 +89,6 @@ router.get(
  *   put:
  *     summary: Review a loan application
  *     tags: [Loans]
- *     security:
- *       - bearerAuth: []
  *     parameters:
  *       - name: id
  *         in: path
@@ -107,9 +114,9 @@ router.get(
  */
 router.put(
   "/:id/review",
-  authenticate,
-  authorize({ hasRole: ["officer"] }),
-  validateRequest(reviewLoanSchema),
+  authenticate, 
+  isAuthorized({ hasRole: ["officer"] }), 
+  //validateRequest(loanSchema),
   async (req: Request, res: Response, next: NextFunction) => {
     await reviewLoan(req, res, next);
   }
@@ -121,8 +128,6 @@ router.put(
  *   put:
  *     summary: Approve a loan application
  *     tags: [Loans]
- *     security:
- *       - bearerAuth: []
  *     parameters:
  *       - name: id
  *         in: path
@@ -146,9 +151,9 @@ router.put(
  */
 router.put(
   "/:id/approve",
-  authenticate,
-  authorize({ hasRole: ["Manager"] }),
-  validateRequest(approveLoanSchema),
+  authenticate, 
+  isAuthorized({ hasRole: ["Manager"] }),
+ // validateRequest(loanSchema), 
   async (req: Request, res: Response, next: NextFunction) => {
     await approveLoan(req, res, next);
   }
