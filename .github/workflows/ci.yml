@@ -1,0 +1,31 @@
+name: Node.js CI
+ 
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest  
+ 
+    steps:
+      - uses: actions/checkout@v2
+ 
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+ 
+      - name: Set FIREBASE_SERVICE_ACCOUNT_KEY
+        run: echo "FIREBASE_SERVICE_ACCOUNT_KEY=${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}" >> $GITHUB_ENV
+ 
+      - name: Set up Firebase service account
+        run: echo "$FIREBASE_SERVICE_ACCOUNT_KEY" | base64 -d > ./serviceAccountKey.json
+ 
+      - name: Install dependencies
+        run: npm install
+ 
+      - name: Run tests
+        run: npm test

@@ -1,0 +1,253 @@
+{
+	"info": {
+		"_postman_id": "027e7b95-e2dd-4e9e-aa60-20f5be7b111e",
+		"name": "Assignment_04_backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "41580345"
+	},
+	"item": [
+		{
+			"name": "Loans",
+			"item": [
+				{
+					"name": "POST Loan",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImJjNDAxN2U3MGE4MWM5NTMxY2YxYjY4MjY4M2Q5OThlNGY1NTg5MTkiLCJ0eXAiOiJKV1QifQ.eyJyb2xlIjoiTWFuYWdlciIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9hc3NpZ25tZW50LTA0LWJhY2tlbmQiLCJhdWQiOiJhc3NpZ25tZW50LTA0LWJhY2tlbmQiLCJhdXRoX3RpbWUiOjE3NDE2MzgyMDMsInVzZXJfaWQiOiJyTzE4TTgwanZhaHNsVGRKWE9HSEhoRk8xR0YyIiwic3ViIjoick8xOE04MGp2YWhzbFRkSlhPR0hIaEZPMUdGMiIsImlhdCI6MTc0MTYzODIwMywiZXhwIjoxNzQxNjQxODAzLCJlbWFpbCI6InN1YmhpODU1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJzdWJoaTg1NUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.fPiGHJTiNnlqW9qbacxkwehfN0yQeI20x4GsG8zLpVWvRF6jkOrv9TlalGfCVzPimWgdq1vXLY26vPhjxq6y84X-aYgrN-jisUBT73E21o47iTYkEVqnPhOvC48eRzjNfgHhyJ8SR0kGAhJ6Vahbmn09D6dozHuNcJXR0LTL4pyaRPUfZKiyTwVmu-iitlwfmHqNkcyVdAXav3XNPErY_Qm2CkkGhv3sOFhK42s7tqAx5Zmh2GkYe8CbXAeeFy1a11XvB8aXGSUFGvNsI0KlhV7Dvl31Y7K_9dmNJLmKVSD2ZGem6to6XUf1LqrzHhS0QEed1jbIq1lDdfkMD9uQtg",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"borrowerId\": \"string\",\r\n  \"amount\": 1,\r\n  \"termMonths\": 1,\r\n  \"interestRate\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/v1/loans"
+					},
+					"response": []
+				},
+				{
+					"name": "POST test Loan without token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"borrowerId\": \"string\",\r\n  \"amount\": 1,\r\n  \"termMonths\": 1,\r\n  \"interestRate\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/v1/loans"
+					},
+					"response": []
+				},
+				{
+					"name": "GET Loan",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImJjNDAxN2U3MGE4MWM5NTMxY2YxYjY4MjY4M2Q5OThlNGY1NTg5MTkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vYXNzaWdubWVudC0wNC1iYWNrZW5kIiwiYXVkIjoiYXNzaWdubWVudC0wNC1iYWNrZW5kIiwiYXV0aF90aW1lIjoxNzQxNjQ0NDI5LCJ1c2VyX2lkIjoiMENMNUtUR2RCZmgwRGpFcFpkVXJMbEZ3aXU3MyIsInN1YiI6IjBDTDVLVEdkQmZoMERqRXBaZFVyTGxGd2l1NzMiLCJpYXQiOjE3NDE2NDQ0MjksImV4cCI6MTc0MTY0ODAyOSwiZW1haWwiOiJwcmVldHNpbmdoQGdtYWkuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbInByZWV0c2luZ2hAZ21haS5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.piK25juSfn8IS5anhJQdyzinfUMyRbUNOjZk6PAExMcYcEfF6zuxF0yL5V2_veoGBkp5o1rwB6ZOEEFKG3Dazq-MjBkgJ7wKotgYHD710ZXwOop-WgBAzHCw2eC901QZRc7ptsW3MeoekWoF9a3kciBk7nsbrsHXXIb1UdWG-vEifsgo1hqv5PqfEifBCuhoqMGk7Ig0IsVUvJZnisNILKQfHS-heu0AbbBYGPUEi0UGd2IekMoPplID3_L9uCZbGXAaK2BEn5CJ0o1S0TBX97pp_7AFbU1IQ89SmnZcjN_jjbhM2Z_aYd_p7HbxK0sHrU6Kk-oI41GB8G7TkyHQkg",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:3000/api/v1/loans"
+					},
+					"response": []
+				},
+				{
+					"name": "GET Loan No Role Assign",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/api/v1/loans"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Review",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImJjNDAxN2U3MGE4MWM5NTMxY2YxYjY4MjY4M2Q5OThlNGY1NTg5MTkiLCJ0eXAiOiJKV1QifQ.eyJyb2xlIjoib2ZmaWNlciIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9hc3NpZ25tZW50LTA0LWJhY2tlbmQiLCJhdWQiOiJhc3NpZ25tZW50LTA0LWJhY2tlbmQiLCJhdXRoX3RpbWUiOjE3NDE2NDgwNjgsInVzZXJfaWQiOiJXYlBBQ292U01mU2xpVlByc0J0VWlYeUE4R2syIiwic3ViIjoiV2JQQUNvdlNNZlNsaVZQcnNCdFVpWHlBOEdrMiIsImlhdCI6MTc0MTY0ODA2OCwiZXhwIjoxNzQxNjUxNjY4LCJlbWFpbCI6InN1YmhwcmVldHNpbmdoQGFjYWRlbWljLnJyYy5jYSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJzdWJocHJlZXRzaW5naEBhY2FkZW1pYy5ycmMuY2EiXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.JnataCGlALPbYbk0xrGFJkocD86zQbaolZGz_tm2DuhcRtsmiF5BBHJ4B5nz-uAer6g4SiO9HXMfqBcwlx6GbEjSPK0roNIRXr4cjMVSj-KsTf1n8GWztR_tTVJnB0TuNWB_tJPxeziaCayRi18e1Q_Wkck6YwX2KoDtr3sA2E8Tnnas-yH9_gt4wD3QBGfVsXVXJ_Oqonj4-ObGUVuitTcdGVbEdxDI1Z2UVwOtDmdHuawNgrEVc3A1Z0bSeuDGedEHEOZz_qSFSVaHOE5wm9YDEQJ2A6UebtkpwpiREdWmosgA56N3DhjHZV--Q1QnBfB4nxdNKZChuoJv-DQpUQ",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:3000/api/v1/loans/r160FTC7umV4xq76UxMf/review"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Approve",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImJjNDAxN2U3MGE4MWM5NTMxY2YxYjY4MjY4M2Q5OThlNGY1NTg5MTkiLCJ0eXAiOiJKV1QifQ.eyJyb2xlIjoiTWFuYWdlciIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9hc3NpZ25tZW50LTA0LWJhY2tlbmQiLCJhdWQiOiJhc3NpZ25tZW50LTA0LWJhY2tlbmQiLCJhdXRoX3RpbWUiOjE3NDE2NDc2OTcsInVzZXJfaWQiOiJ1UmI1VDVpcE1yVVBhYTA1TnVNbEdzdVBodmIyIiwic3ViIjoidVJiNVQ1aXBNclVQYWEwNU51TWxHc3VQaHZiMiIsImlhdCI6MTc0MTY0NzY5NywiZXhwIjoxNzQxNjUxMjk3LCJlbWFpbCI6InN1a2h3aW5kZXJzaW5naDNhQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJzdWtod2luZGVyc2luZ2gzYUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.ERmE-ZS3MKt3ftLqARPBIiqQpOgy1Un4RR7kNvHEDou0ZCbWpEwVtpcvJVhXfYgkGGnUgcKkrW34MODMESTutSWlRdFSQq5z3UmCS38t4OzNA0uPpENe3A95lRLndI85rohAelOQPyxHY_LX9nZc7ZY1wZ9GnXmDZirlk7xLiOb9Ig9tDmeQhbSpUF3jmZ-PD9UcW-MfrIKwnIKzrmYJ9Qom-TtLrrYcfjYujizHEWRytPcWkk-qdUkhZWnSLURwFyZfB13RAFCKdIeRepgIjcDDSqxZwnZs_qk_jfefpyGofqWPouo_gWGFQXplhLLyCPZq-x_xpz6GKAl92y3Isw",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/v1/loans/r160FTC7umV4xq76UxMf/approve"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "get token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"email\": \"subhi855@gmail.com\",\n\"password\": \"subhi855#\",\n\"returnSecureToken\": true\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=\nAIzaSyDA2RbO0DxVjw3oDQYsmBgL0ap6C_KrYlU",
+					"protocol": "https",
+					"host": [
+						"identitytoolkit",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"v1",
+						"accounts:signInWithPassword"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "\nAIzaSyDA2RbO0DxVjw3oDQYsmBgL0ap6C_KrYlU"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl --location 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=your-key' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n\"email\": \"user email\",\n\"password\": \"user password\",\n\"returnSecureToken\": true\n}\n'"
+			},
+			"response": []
+		},
+		{
+			"name": "setCustomClaims Revised",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImJjNDAxN2U3MGE4MWM5NTMxY2YxYjY4MjY4M2Q5OThlNGY1NTg5MTkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vYXNzaWdubWVudC0wNC1iYWNrZW5kIiwiYXVkIjoiYXNzaWdubWVudC0wNC1iYWNrZW5kIiwiYXV0aF90aW1lIjoxNzQxNjQ4MDA5LCJ1c2VyX2lkIjoiV2JQQUNvdlNNZlNsaVZQcnNCdFVpWHlBOEdrMiIsInN1YiI6IldiUEFDb3ZTTWZTbGlWUHJzQnRVaVh5QThHazIiLCJpYXQiOjE3NDE2NDgwMDksImV4cCI6MTc0MTY1MTYwOSwiZW1haWwiOiJzdWJocHJlZXRzaW5naEBhY2FkZW1pYy5ycmMuY2EiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsic3ViaHByZWV0c2luZ2hAYWNhZGVtaWMucnJjLmNhIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.tSWq8Aov7_sc7v-vUbyudn1B1u-AJeSMvzh__0QjB4kw_grTVJ_IeSkfEZjeOq4QLercL-Jped9OJshYEaCI5K1y_xhpzwbruchIC6wUqhdCP-NmomJ1pJTeKzIXuQPze8RMbH56LTT6gl7voog02UrjtODkUDoNsmvCtgtVG1SrVqP6CX2wF8a5_6Sh0M3wj3t1XT7dHZiYfEbJHGpISeFLfCY2QMXLdDg9Jh4slLx2mSG2Eli_dMUT6xwFSOXuihU85SzY3wEJKTfrI1uxTJevW8JcJbTG8ogpLJ8Fzdp4mppI_X0iXGv_bCVKqjohl7OVc27VJUs37Fmh4p4gVQ"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"uid\": \"rO18M80jvahslTdJXOGHHhFO1GF2\",\n\"claims\": {\n\"role\": \"user\"\n}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/v1/admin/setCustomClaims",
+				"description": "Generated from cURL: curl --location 'http://localhost:3000/api/v1/admin/setCustomClaims' \\\n--header 'Authorization: Bearer your-token' \\\n--header 'Content-Type: application/json' \\\n--data '{\n\"uid\": \"user-id\",\n\"claims\": {\n\"role\": \"admin\"\n}\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Set Role",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImJjNDAxN2U3MGE4MWM5NTMxY2YxYjY4MjY4M2Q5OThlNGY1NTg5MTkiLCJ0eXAiOiJKV1QifQ.eyJyb2xlIjoiYWRtaW4iLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vYXNzaWdubWVudC0wNC1iYWNrZW5kIiwiYXVkIjoiYXNzaWdubWVudC0wNC1iYWNrZW5kIiwiYXV0aF90aW1lIjoxNzQxNjQ2MjQ2LCJ1c2VyX2lkIjoick8xOE04MGp2YWhzbFRkSlhPR0hIaEZPMUdGMiIsInN1YiI6InJPMThNODBqdmFoc2xUZEpYT0dISGhGTzFHRjIiLCJpYXQiOjE3NDE2NDYyNDYsImV4cCI6MTc0MTY0OTg0NiwiZW1haWwiOiJzdWJoaTg1NUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsic3ViaGk4NTVAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.ZRtE7IJXKUn6X4nzBYYwNn-Y6dGQkxIA8IXEI76pAew66TWAXj0oYm5j5IBvE-D5t1Vfwnfo6usC9Y-VczjuVeGa42u_IjopZAbMOLcQm4LBADL9SfUggTGI2fjoI1ngbLo2yvJm1WqaLc19xYaqTTqUblTl70fUzk6FsybEAxukvQfgz4-tBFhjDg69CPCm-SwSw2V62psQPgbck1nCAUfSQkJzDzml7ZzXIgQukKKOt_bErDCcflsnshLyogeDLXmEXN7TvSE7fSdf-GICq-JU1sJBp4yNs5UKldu2a_SvFZZibOxc4BeawIGlpKlX9GRsJX0r5wv0Nn30Bep5kw",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/v1/users/rO18M80jvahslTdJXOGHHhFO1GF2"
+			},
+			"response": []
+		}
+	]
+}
