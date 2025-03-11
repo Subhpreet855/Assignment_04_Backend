@@ -1,12 +1,23 @@
 import { initializeApp, cert, ServiceAccount } from "firebase-admin/app";
-import { getFirestore, Firestore } from "firebase-admin/firestore";
-import serviceAccount from "../assignment-04-backend-firebase-adminsdk-fbsvc-cba40b260b.json";
-import { getAuth, Auth } from "firebase-admin/auth"
-
+import { getFirestore, Firestore, FieldValue } from "firebase-admin/firestore";
+import dotenv from "dotenv";
+import { getAuth, Auth} from "firebase-admin/auth"
+dotenv.config();
+ 
+if (!process.env.FIREBASE_SERVICE_ACCOUNT_KEY) {
+    throw new Error("FIREBASE_SERVICE_ACCOUNT_KEY is not defined in the .env file");
+}
+ 
+const serviceAccount: ServiceAccount = JSON.parse(
+    Buffer.from(process.env.FIREBASE_SERVICE_ACCOUNT_KEY as string, "base64").toString("utf-8")
+);
+ 
 initializeApp({
-	credential: cert(serviceAccount as ServiceAccount),
+  credential: cert(serviceAccount),
 });
-
+ 
+ 
 const db: Firestore = getFirestore();
 const auth: Auth = getAuth();
-export { db, auth };
+ 
+export { auth, db, FieldValue };

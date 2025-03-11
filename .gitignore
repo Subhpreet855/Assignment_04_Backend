@@ -3,3 +3,4 @@ dist/
 .vscode/
 assignment-04-backend-firebase-adminsdk-fbsvc-cba40b260b.json
 token.txt
+.env
