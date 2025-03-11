@@ -4,7 +4,7 @@ import { auth } from "../config/firebaseConfig";
 import { AuthenticationError } from "../src/api/v1/error/error";
 
 // Mock Firebase auth
-jest.mock("../config/firebaseconfig", () => ({
+jest.mock("../config/firebaseConfig", () => ({
     auth: {
         verifyIdToken: jest.fn(),
     },
